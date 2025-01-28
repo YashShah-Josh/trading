@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "User details" %>
+
+<h1>User details</h1>
+
+<div id="user_details">
+  <% @user_details.each do |user_detail| %>
+    <%= render user_detail %>
+    <p>
+      <%= user_detail %>
+      <%= link_to "Show this user detail", user_detail %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New user detail", new_user_detail_path %>
