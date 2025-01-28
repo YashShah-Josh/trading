@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_27_045342) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_27_052256) do
   create_table "stocks", force: :cascade do |t|
     t.string "stock_name"
     t.integer "stock_price"
@@ -39,18 +39,19 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_045342) do
     t.string "pan_card_number"
     t.string "name"
     t.string "mobile_number"
-    t.string "email"
     t.text "address"
     t.integer "bank_account_number"
     t.string "ifsc_code"
     t.string "upi_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "user_stocks", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_user_details_on_email"
+    t.index ["reset_password_token"], name: "index_user_details_on_reset_password_token", unique: true
   end
 
   add_foreign_key "transaction_details", "stocks"

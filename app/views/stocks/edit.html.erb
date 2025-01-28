@@ -1,12 +1,35 @@
-<% content_for :title, "Editing stock" %>
+<h1><%= @stock.new_record? ? 'New Stock' : 'Edit Stock' %></h1>
 
-<h1>Editing stock</h1>
+<%= form_with model: @stock, local: true do |form| %>
+  <% if @stock.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stock.errors.count, 'error') %> prevented this stock from being saved:</h2>
+      <ul>
+        <% @stock.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= render "form", stock: @stock %>
+  <div>
+    <%= form.label :stock_name %>
+    <%= form.text_field :stock_name %>
+  </div>
 
-<br>
+  <div>
+    <%= form.label :stock_price %>
+    <%= form.number_field :stock_price, step: 0.01 %>
+  </div>
 
-<div>
-  <%= link_to "Show this stock", @stock %> |
-  <%= link_to "Back to stocks", stocks_path %>
-</div>
+  <div>
+    <%= form.label :quantity_available %>
+    <%= form.number_field :quantity_available %>
+  </div>
+
+  <div>
+    <%= form.submit 'Save', class: 'btn btn-success' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Stocks', stocks_path, class: 'btn btn-primary' %>

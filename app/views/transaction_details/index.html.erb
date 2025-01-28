@@ -1,16 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<h1>All Transactions</h1>
 
-<% content_for :title, "Transaction details" %>
-
-<h1>Transaction details</h1>
-
-<div id="transaction_details">
-  <% @transaction_details.each do |transaction_detail| %>
-    <%= render transaction_detail %>
-    <p>
-      <%= link_to "Show this transaction detail", transaction_detail %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New transaction detail", new_transaction_detail_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Transaction Type</th>
+      <th>User</th>
+      <th>Stock</th>
+      <th>Quantity</th>
+      <th>Transaction Value</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transaction_details.each do |transaction| %>
+      <tr>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.user_detail.name %></td>
+        <td><%= transaction.stock.stock_name %></td>
+        <td><%= transaction.quantity %></td>
+        <td><%= number_to_currency(transaction.transaction_value) %></td>
+        <td><%= transaction.created_at.strftime('%d %b %Y') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

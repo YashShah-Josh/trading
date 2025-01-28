@@ -3,5 +3,5 @@ class Stock < ApplicationRecord
     validates :stock_price, presence: true
     validates :quantity_available, presence: true
 
-    has_many :transaction_detail
+    has_many :transaction_details
 end

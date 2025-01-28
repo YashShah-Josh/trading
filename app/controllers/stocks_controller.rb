@@ -1,5 +1,5 @@
 class StocksController < ApplicationController
-  before_action :set_stock, only: %i[ show edit update destroy ]
+  before_action :set_stock, only: %i[show edit update destroy]
 
   # GET /stocks or /stocks.json
   def index
@@ -19,7 +19,6 @@ class StocksController < ApplicationController
   def edit
   end
 
-  # POST /stocks or /stocks.json
   def create
     @stock = Stock.new(stock_params)
 
@@ -28,7 +27,7 @@ class StocksController < ApplicationController
         format.html { redirect_to @stock, notice: "Stock was successfully created." }
         format.json { render :show, status: :created, location: @stock }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new }
         format.json { render json: @stock.errors, status: :unprocessable_entity }
       end
     end
@@ -65,6 +64,6 @@ class StocksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stock_params
-      params.fetch(:stock, {})
+      params.require(:stock).permit(:stock_name, :stock_price, :quantity_available)
     end
 end

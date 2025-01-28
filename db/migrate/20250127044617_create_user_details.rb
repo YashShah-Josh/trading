@@ -5,7 +5,7 @@ class CreateUserDetails < ActiveRecord::Migration[7.2]
       t.string :pan_card_number
       t.string :name
       t.string :mobile_number
-      t.string :email
+      
       t.text :address
       t.integer :bank_account_number
       t.string :ifsc_code

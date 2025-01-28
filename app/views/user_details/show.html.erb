@@ -1,10 +1,35 @@
-<p style="color: green"><%= notice %></p>
+<h1><%= @user_detail.name %></h1>
 
-<%= render @user_detail %>
+<p><strong>Email:</strong> <%= @user_detail.email %></p>
+<p><strong>Mobile:</strong> <%= @user_detail.mobile_number %></p>
+<p><strong>Address:</strong> <%= @user_detail.address %></p>
 
-<div>
-  <%= link_to "Edit this user detail", edit_user_detail_path(@user_detail) %> |
-  <%= link_to "Back to user details", user_details_path %>
+<h2>Transactions for This User</h2>
+<% if @user_detail.transaction_details.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Stock</th>
+        <th>Transaction Type</th>
+        <th>Quantity</th>
+        <th>Transaction Value</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user_detail.transaction_details.each do |transaction| %>
+        <tr>
+          <td><%= transaction.stock.stock_name %></td>
+          <td><%= transaction.transaction_type %></td>
+          <td><%= transaction.quantity %></td>
+          <td><%= number_to_currency(transaction.transaction_value) %></td>
+          <td><%= transaction.created_at.strftime('%d %b %Y') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No transactions found for this user.</p>
+<% end %>
 
-  <%= button_to "Destroy this user detail", @user_detail, method: :delete %>
-</div>
+<%= link_to 'Back to Users', user_details_path, class: 'btn btn-primary' %>

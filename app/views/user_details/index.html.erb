@@ -1,17 +1,28 @@
-<p style="color: green"><%= notice %></p>
+<h1>User Details</h1>
 
-<% content_for :title, "User details" %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Mobile</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user_details.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.mobile_number %></td>
+        <td>
+          <%= link_to 'View', user_detail_path(user), class: 'btn btn-info' %>
+          <%= link_to 'Edit', edit_user_detail_path(user), class: 'btn btn-warning' %>
+          <%= link_to 'Delete', user_detail_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<h1>User details</h1>
-
-<div id="user_details">
-  <% @user_details.each do |user_detail| %>
-    <%= render user_detail %>
-    <p>
-      <%= user_detail %>
-      <%= link_to "Show this user detail", user_detail %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New user detail", new_user_detail_path %>
+<%= link_to 'Add New User', new_user_detail_path, class: 'btn btn-success' %>

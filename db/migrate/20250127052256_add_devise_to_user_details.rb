@@ -37,7 +37,7 @@ class AddDeviseToUserDetails < ActiveRecord::Migration[7.2]
       # t.timestamps null: false
     end
 
-    add_index :user_details, :email,                unique: true
+    add_index :user_details, :email            
     add_index :user_details, :reset_password_token, unique: true
     # add_index :user_details, :confirmation_token,   unique: true
     # add_index :user_details, :unlock_token,         unique: true
