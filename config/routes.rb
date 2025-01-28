@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      get "stocks/index"
+      resources :stocks, only: [:index, :show]    end
+  end
   devise_for :user_details
   resources :transaction_details
   resources :stocks
@@ -16,4 +21,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  
 end
