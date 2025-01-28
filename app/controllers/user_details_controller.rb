@@ -65,6 +65,9 @@ class UserDetailsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_detail_params
-      params.fetch(:user_detail, {})
+      params.require(:user_detail).permit(
+        :name, :email, :mobile_number, :address, :aadhar_card_number, 
+        :pan_card_number, :bank_account_number, :ifsc_code, :upi_id
+      )
     end
 end

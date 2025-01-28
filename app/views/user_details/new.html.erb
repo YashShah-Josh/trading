@@ -1,11 +1,65 @@
-<% content_for :title, "New user detail" %>
+<h1>New User</h1>
 
-<h1>New user detail</h1>
+<%= form_with model: @user_detail, local: true do |form| %>
+  <% if @user_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_detail.errors.count, 'error') %> prevented this user from being saved:</h2>
+      <ul>
+        <% @user_detail.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= render "form", user_detail: @user_detail %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true %>
+  </div>
 
-<br>
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true %>
+  </div>
 
-<div>
-  <%= link_to "Back to user details", user_details_path %>
-</div>
+  <div>
+    <%= form.label :mobile_number %>
+    <%= form.text_field :mobile_number, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :address %>
+    <%= form.text_area :address, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :aadhar_card_number %>
+    <%= form.number_field :aadhar_card_number, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :pan_card_number %>
+    <%= form.text_field :pan_card_number, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :bank_account_number %>
+    <%= form.number_field :bank_account_number, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :ifsc_code %>
+    <%= form.text_field :ifsc_code, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :upi_id %>
+    <%= form.text_field :upi_id %>
+  </div>
+
+  <div>
+    <%= form.submit 'Create User', class: 'btn btn-success' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Users', user_details_path, class: 'btn btn-primary' %>
